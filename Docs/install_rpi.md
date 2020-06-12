@@ -20,18 +20,16 @@ should return something like this:
     OpenJDK Server VM (build 11.0.7+10-post-Raspbian-3deb10u1, mixed mode)
 
 2) libsodium23 & libsodium-dev_1.0.16 (libraries)
-
-    ```
+```
     sudo apt install libsodium23 libsodium-dev -y
-
+```
 3) ntp synced to a good time source
-
-    ```
+```
     sudo apt-get install ntp -y
     sudo service ntp stop
     sudo ntpdate ntp.ubuntu.com
     sudo service ntp restart
-
+```
 If you can't sync your node, always check the CLOCK TIME!!
 
 ##<u>Node Set Up</u>
@@ -57,7 +55,7 @@ if you need to recompile, use
     ./gradlew build --rerun-tasks  
 
   
-  1. GBA Istanbul Byzantine Fault-Tolerant (IBFT) genesis block, save as `GBA_IBFT_genesis.json
+  1. GBA Istanbul Byzantine Fault-Tolerant (IBFT) genesis block, save as `GBA_IBFT_genesis.json`
 
 <pre>
 {
@@ -84,9 +82,9 @@ if you need to recompile, use
 ##<u>Node Connection to the PoA Network</u>
 
 open port 30303 in your firewall:
-    `sudo ufw allow 30303
+    `sudo ufw allow 30303`
 
-(in progress)
+(WIP)
 
 make a static-nodes.json file in your build/install/besu folder  
   
