@@ -1,42 +1,59 @@
-# Installing GBAChain Node on Raspberry Pi:
+# Installing GBAChain Node on Linux:
 
 ##<u>prerequisites:</u>
 
-1) JDK
+1) a recent Java installation (OpenJDK 13 or 14)
 
 find your available versions of Java
 
     sudo apt search openjdk   # should show available versions of JDK/JRE (debian)
+    sudo dnf search openjdk | grep latest | cut -f1 -d':'     # (Fedora/Redhat/CentOS)
     
-to install OpenJDK
+you will likely need to download OpenJDK, I used the Zulu source:
 
-    sudo apt install openjdk-8-headless
-    java --version
+https://www.azul.com/downloads/zulu-community/?&architecture=x86-64-bit&package=jdk
+
+    sha256sum zulu13.29.9-ca-jdk13.0.2-linux_amd64.deb   # verify .deb checksum OK
+    sudo dnf install zulu*linux.x86_64.rpm  # on Fedora, CentOS, RHEL
+    sudo dpkg -i zulu*linux_amd64.deb  # on Debian 
+    java --version 
     
 should return something like this:
   
-    openjdk 11.0.7 2020-04-14
-    OpenJDK Runtime Environment (build 11.0.7+10-post-Raspbian-3deb10u1)
-    OpenJDK Server VM (build 11.0.7+10-post-Raspbian-3deb10u1, mixed mode)
+    openjdk 13.0.2 2020-01-14
+    OpenJDK Runtime Environment Zulu13.29+9-CA (build 13.0.2+6-MTS)
+    OpenJDK 64-Bit Server VM Zulu13.29+9-CA (build 13.0.2+6-MTS, mixed mode, sharing)
 
 2) libsodium23 & libsodium-dev_1.0.16 (libraries)
 
-    ```
-    sudo apt install libsodium23 libsodium-dev -y
+on Linux Mint 17 'Qiana' (based on Ubuntu 14.04 "trusty"), I installed
+
+    libsodium23_1.0.16-0ppa3_trusty1_amd64.deb 
+    libsodium-dev_1.0.16-0ppa3_trusty1_amd64.deb
+
+via 
+
+    sudo dpkg -i libsodium23_1.0.16-0ppa3_trusty1_amd64.deb
+    sudo dpkg -i libsodium-dev_1.0.16-0ppa3_trusty1_amd64.deb     
+    
+from 
+
+https://launchpad.net/~phoerious/+archive/ubuntu/keepassxc/+sourcepub/8814980/+listing-archive-extra
+
 
 3) ntp synced to a good time source
 
-    ```
-    sudo apt-get install ntp -y
+    sudo apt-get install ntp
     sudo service ntp stop
     sudo ntpdate ntp.ubuntu.com
     sudo service ntp restart
 
 If you can't sync your node, always check the CLOCK TIME!!
 
+
 ##<u>Node Set Up</u>
 
-Using instructions from this page:
+using instructions from this page:
 
 https://wiki.hyperledger.org/display/BESU/Building+from+source
 
@@ -57,7 +74,7 @@ if you need to recompile, use
     ./gradlew build --rerun-tasks  
 
   
-  1. GBA Istanbul Byzantine Fault-Tolerant (IBFT) genesis block, save as `GBA_IBFT_genesis.json
+  1. GBA Istanbul Byzantine Fault-Tolerant (IBFT) genesis block, save as GBA_IBFT_genesis.json
 
 <pre>
 {
@@ -84,7 +101,7 @@ if you need to recompile, use
 ##<u>Node Connection to the PoA Network</u>
 
 open port 30303 in your firewall:
-    `sudo ufw allow 30303
+    sudo ufw allow 30303
 
 (in progress)
 
@@ -221,3 +238,36 @@ from
 https://launchpad.net/~phoerious/+archive/ubuntu/keepassxc/+sourcepub/8814980/+listing-archive-extra
 
 you may need to find a recent version of libsodium & libsodium-dev for your specific system
+
+  
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
